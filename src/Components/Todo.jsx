@@ -9,6 +9,15 @@ function Todo() {
       status: false
     }
   ]);
+  const handleDelete = (id) => {
+    setTodo(todo.filter((item) => item.id !== id));
+  };
+  const handleToggle = (id) => {
+    const updatedTodo = todo.map((item) =>
+      item.id === id ? { ...item, status: !item.status } : item
+    );
+    setTodo(updatedTodo);
+  };
   const handleTaskCreate = (title) => {
     const payload = {
       title: title,
@@ -25,6 +34,8 @@ function Todo() {
         <TodoItem
           key={item.id}
           title={item.title}
+          handleDelete={handleDelete}
+          handleToggle={handleToggle}
           status={item.status}
           id={item.id}
         />
